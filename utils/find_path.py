@@ -10,18 +10,19 @@ def find_path(filename: str):
         command = f"where {filename}.exe"
     else:
         command = f"which {filename}"
-    
-    result = subprocess.run(
-        command, 
-        capture_output= True, 
-        text= True
-    )
-    list_path = result.stdout.split("\n")
-    file = list_path[0].strip()
-    if file != '':
-        if os.path.exists(file):
-            return file
-        
+    try:
+        result = subprocess.run(
+            command, 
+            capture_output= True, 
+            text= True
+        )
+        list_path = result.stdout.split("\n")
+        file = list_path[0].strip()
+        if file != '':
+            if os.path.exists(file):
+                return file
+    except:
+        pass
     if system == "Windows":
         searching_dirs = [
             os.environ.get("APPDATA"),
