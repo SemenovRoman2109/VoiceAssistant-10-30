@@ -24,7 +24,7 @@ def add_command(source):
 
         accept = get_voice(source)
 
-        if 'підтвердити' in accept.lower() or 'так' in accept.lower():
+        if accept != None and ('підтвердити' in accept.lower() or 'так' in accept.lower()):
             run_voice("Скажіть назву файлу додатка")
 
             app_name = get_voice(source)
@@ -34,7 +34,7 @@ def add_command(source):
 
                 name_accept = get_voice(source)
 
-                if 'підтвердити' in name_accept.lower() or 'так' in name_accept.lower():
+                if name_accept != None and ('підтвердити' in name_accept.lower() or 'так' in name_accept.lower()):
                     AppCommand.objects.create(name= app_name, keyword= keyword)
                     run_voice("Команду успішно додано")
 

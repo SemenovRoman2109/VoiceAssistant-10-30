@@ -12,4 +12,18 @@ class AppCommand(models.Model):
     name = models.CharField(max_length= 100)
     keyword = models.CharField(max_length= 100)
     def __str__(self):
-        return f"Запускає {self.name} за комнадою {self.keyword}"
+        return f"Запускає/Закриває додаток {self.name} за комнадою {self.keyword}"
+
+class WebSite(models.Model):
+    url = models.URLField(max_length= 255)
+    name = models.CharField(max_length= 255)
+
+    def __str__(self):
+        return f"Відкриває сайт {self.name}"
+    
+class AppGroup(models.Model):
+    name = models.CharField(max_length=255)
+    apps = models.ManyToManyField(AppCommand)
+    
+    def __str__(self):
+        return f"Группа додатків {self.apps.all()}"
